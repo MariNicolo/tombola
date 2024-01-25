@@ -1,5 +1,6 @@
 let righe = 10;
 let colonne = 10;
+let numeriGenerati = [];
 
 function DisegnaTabella() {
 
@@ -19,7 +20,31 @@ function DisegnaTabella() {
     }
 
     div1.appendChild(tabella);
+}
 
+function estraiNumero() {
+    if (numeriGenerati.length >= righe * colonne) {
+        alert("Hai estratto tutti i numeri possibili!");
+        return;
+    }
+    while (true) {
+        var num = Math.floor(Math.random() * (righe * colonne)) + 1;
+        if (!numeriGenerati.includes(num)) {
+            numeriGenerati.push(num);
+
+            var table = document.getElementsByTagName('table')[0];
+            var cells = table.getElementsByTagName('td');
+
+            for (var i = 0; i < cells.length; i++) {
+                if (parseInt(cells[i].innerText) === num) {
+                    cells[i].style.backgroundColor = 'yellow';
+                    break;
+                }
+            }
+
+            break;
+        }
+    }
 }
 
 DisegnaTabella();
